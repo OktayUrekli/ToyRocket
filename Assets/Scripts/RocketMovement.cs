@@ -7,6 +7,8 @@ public class RocketMovement : MonoBehaviour
     [SerializeField] float thrustingPower;
     [SerializeField] float rotationSpeed;
 
+    [SerializeField] ParticleSystem mainMotorVFX,leftRotMotorVFX,rightRotMotorVFX;
+
 
 
     void Start()
@@ -26,6 +28,7 @@ public class RocketMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) // rokete gaz verme 
         {
             rocketRB.AddRelativeForce(transform.up*thrustingPower*Time.deltaTime,ForceMode.VelocityChange);
+            mainMotorVFX.Play();
         }
     }
 
@@ -35,12 +38,14 @@ public class RocketMovement : MonoBehaviour
         {
             rocketRB.freezeRotation = true;
             transform.Rotate(Vector3.forward*rotationSpeed*Time.deltaTime);
+            rightRotMotorVFX.Play();
             rocketRB.freezeRotation = false;
         }
         else if (Input.GetKey(KeyCode.D)) // saða rotasyon
         {
             rocketRB.freezeRotation = true;
             transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime);
+            leftRotMotorVFX.Play();
             rocketRB.freezeRotation = false;
         }
     }
