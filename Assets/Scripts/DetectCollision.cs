@@ -1,38 +1,98 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DetectCollision : MonoBehaviour
 {
     AudioSource playerAudioSource;
 
+    [SerializeField] GameObject levelFinishedPanel, rocketCrashedPanel, fuelOverPanel;
+
     [SerializeField] ParticleSystem crashObstacleVFX;
     [SerializeField] AudioClip collectProcejtile, collectFuel,collectFood,crashSFX;
+    [SerializeField] Image fuelBar;
+    [SerializeField] TextMeshProUGUI foodCountTxt,projectileCountTxt;
+
+    int foodCount,projectileCount;
+    public float fuelAmount;
 
 
-    
     void Start()
     {
+        PanelActiveFalse();
+        FirstAssignment();
         playerAudioSource = GetComponent<AudioSource>();
     }
 
-    
+    void PanelActiveFalse()
+    {
+        levelFinishedPanel.SetActive(false);
+        rocketCrashedPanel.SetActive(false);
+        fuelOverPanel.SetActive(false);
+    }
+
+    void FirstAssignment()
+    {
+        foodCount = 0;
+        projectileCount = 0;
+        fuelAmount = 100;
+
+        foodCountTxt.text = foodCount.ToString();
+        projectileCountTxt.text = projectileCount.ToString();
+        fuelBar.fillAmount= fuelAmount/100f;
+    }
+
+    void UpdateFoodCount()
+    {
+        foodCountTxt.text = foodCount.ToString();
+    }
+
+    void UpdateProjectileCount()
+    {  
+        projectileCountTxt.text = projectileCount.ToString();
+    }
+
+    public void UpdateFuelBar()
+    {
+        if (fuelAmount<=100 && fuelAmount > 0)
+        {
+            fuelBar.fillAmount = fuelAmount / 100f;
+        }
+        else if (fuelAmount>100)
+        {
+            fuelAmount = 100;
+            fuelBar.fillAmount = fuelAmount / 100f;
+        }
+        else if (fuelAmount<=0)
+        {
+            Time.timeScale = 0;
+            fuelOverPanel.SetActive(true);
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
-            Destroy(other.gameObject);
+            projectileCount++;
             playerAudioSource.PlayOneShot(collectProcejtile);
-            
+            UpdateProjectileCount();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Fuel"))
         {
-            Destroy(other.gameObject);
+            fuelAmount += 20f;
             playerAudioSource.PlayOneShot(collectFuel);
+            UpdateFuelBar();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Food"))
         {
-            Destroy(other.gameObject);
+            foodCount+=25;
+            UpdateFoodCount();
             playerAudioSource.PlayOneShot(collectFood);
+            Destroy(other.gameObject);
         }
     }
 
@@ -40,8 +100,17 @@ public class DetectCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            // crash paneli açýlacak
             crashObstacleVFX.Play();
             playerAudioSource.PlayOneShot(crashSFX);
+
+            Time.timeScale = 0;
+            rocketCrashedPanel.SetActive(true);
+        }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Time.timeScale = 0;
+            levelFinishedPanel.SetActive(true);
         }
     }
 }

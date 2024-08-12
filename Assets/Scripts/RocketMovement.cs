@@ -29,6 +29,8 @@ public class RocketMovement : MonoBehaviour
         {
             rocketRB.AddRelativeForce(transform.up*thrustingPower*Time.deltaTime,ForceMode.VelocityChange);
             mainMotorVFX.Play();
+            gameObject.GetComponent<DetectCollision>().fuelAmount-=0.1f;
+            gameObject.GetComponent<DetectCollision>().UpdateFuelBar();
         }
     }
 
