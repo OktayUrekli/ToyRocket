@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class MenuCanvasMainManager : MonoBehaviour
 {
-    AudioSource canvasAS;
 
-    [SerializeField] AudioClip simpleButtonSound, backButtonSound;
+    AudioManager audioManager;
+
     [SerializeField] GameObject[] panels;
+
+    private void Awake()
+    {
+        audioManager=GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
-        canvasAS = GetComponent<AudioSource>();
         StartingPanelAcitivationFalse();
     }
 
@@ -18,19 +22,13 @@ public class MenuCanvasMainManager : MonoBehaviour
         foreach (var panel in panels) { panel.SetActive(false);  }
     }
 
-    
-    void Update()
-    {
-        
-    }
-
     public void ClickSimpleButtonSound()
     {
-        canvasAS.PlayOneShot(simpleButtonSound);
+        audioManager.PlaySfxClip(audioManager.simpleButtonSound);
     }
 
     public void ClickbackButtonSound()
     {
-        canvasAS.PlayOneShot(backButtonSound);
+        audioManager.PlaySfxClip(audioManager.backButtonSound);
     }
 }

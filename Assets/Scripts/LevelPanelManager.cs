@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,12 +16,6 @@ public class LevelPanelManager : MonoBehaviour
         pageIndex = 0;
         levelPages[pageIndex].SetActive(true);
         leftButton.enabled = false;
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     public void LeftButton()
