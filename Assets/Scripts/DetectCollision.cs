@@ -1,20 +1,30 @@
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DetectCollision : MonoBehaviour
 {
     AudioSource playerAudioSource;
+    
+    [Header("Panels")]
+    [SerializeField] GameObject levelFinishedPanel;
+    [SerializeField] GameObject rocketCrashedPanel;
+    [SerializeField] GameObject fuelOverPanel;
 
-    [SerializeField] GameObject levelFinishedPanel, rocketCrashedPanel, fuelOverPanel;
-
+    [Header("SFX & VFX")]
     [SerializeField] ParticleSystem crashObstacleVFX;
     [SerializeField] AudioClip collectProcejtile, collectFuel,collectFood,crashSFX;
+    
+    [Header("UI Elements")]
     [SerializeField] Image fuelBar;
     [SerializeField] TextMeshProUGUI foodCountTxt,projectileCountTxt;
 
-    int foodCount,projectileCount;
+    [Header("Collectible objects counts")]
+    public int projectileCount;
     public float fuelAmount;
+    
+    int foodCount;
 
 
     void Start()
@@ -47,7 +57,7 @@ public class DetectCollision : MonoBehaviour
         foodCountTxt.text = foodCount.ToString();
     }
 
-    void UpdateProjectileCount()
+    public void UpdateProjectileCount()
     {  
         projectileCountTxt.text = projectileCount.ToString();
     }
@@ -75,7 +85,7 @@ public class DetectCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
-            projectileCount++;
+            projectileCount+=5;
             playerAudioSource.PlayOneShot(collectProcejtile);
             UpdateProjectileCount();
             Destroy(other.gameObject);
