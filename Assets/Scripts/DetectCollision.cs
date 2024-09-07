@@ -14,7 +14,7 @@ public class DetectCollision : MonoBehaviour
 
     [Header("SFX & VFX")]
     [SerializeField] ParticleSystem crashObstacleVFX;
-    [SerializeField] AudioClip collectProcejtile, collectFuel,collectFood,crashSFX;
+    [SerializeField] AudioClip collectProcejtile, collectFuel,collectFood,crashSFX,finishLevelSFX;
     
     [Header("UI Elements")]
     [SerializeField] Image fuelBar;
@@ -114,13 +114,27 @@ public class DetectCollision : MonoBehaviour
             crashObstacleVFX.Play();
             playerAudioSource.PlayOneShot(crashSFX);
 
-            Time.timeScale = 0;
+            // Time.timeScale = 0;
             rocketCrashedPanel.SetActive(true);
+
+            gameObject.GetComponent<RocketMovement>().enabled = false;
+            gameObject.GetComponent<DetectCollision>().enabled = false;
+            gameObject.GetComponent<FireProjectile>().enabled = false;
+
+
         }
         if (collision.gameObject.CompareTag("Finish"))
         {
-            Time.timeScale = 0;
+            playerAudioSource.PlayOneShot(finishLevelSFX);
+
+            // Time.timeScale = 0;
             levelFinishedPanel.SetActive(true);
+
+            gameObject.GetComponent<RocketMovement>().enabled = false;
+            gameObject.GetComponent<DetectCollision>().enabled = false;
+            gameObject.GetComponent<FireProjectile>().enabled = false;
+
+
         }
     }
 }
