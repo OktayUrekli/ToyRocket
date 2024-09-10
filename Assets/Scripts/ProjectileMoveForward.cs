@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ProjectileMoveForward : MonoBehaviour
 {
     [SerializeField] float projectileForce;
 
@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         body.AddForce(gameObject.transform.up*projectileForce,ForceMode.Impulse);
+        Destroy(gameObject,2f);
     }
 
     private void OnCollisionEnter(Collision collision)

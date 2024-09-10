@@ -1122,6 +1122,9 @@ GameObject:
   - component: {fileID: 5633126740047412127}
   - component: {fileID: 8599178598869178629}
   - component: {fileID: 6626921841055617653}
+  - component: {fileID: 186697508576737675}
+  - component: {fileID: 9219603601241402276}
+  - component: {fileID: 4219258743980056900}
   - component: {fileID: 632966429599520170}
   m_Layer: 0
   m_Name: Body
@@ -1263,6 +1266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrustingPower: 25
   rotationSpeed: 200
+  motorSFX: {fileID: 8300000, guid: 115081d2493e160478c13ec73819a45b, type: 3}
   mainMotorVFX: {fileID: 7809983078316538109}
   leftRotMotorVFX: {fileID: 916291033756607493}
   rightRotMotorVFX: {fileID: 2002355933625055349}
@@ -1280,17 +1284,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelFinishedPanel: {fileID: 6630963641002606102}
   rocketCrashedPanel: {fileID: 2300897359466829361}
-  fuelOverPanel: {fileID: 1120829732464151650}
   crashObstacleVFX: {fileID: 2075105952477819520}
   collectProcejtile: {fileID: 8300000, guid: f3045d8d391969743be01c571dfcaaa4, type: 3}
   collectFuel: {fileID: 8300000, guid: 906251439a86c264fac4f8685d94fa2a, type: 3}
   collectFood: {fileID: 8300000, guid: 0addfe5fe65d1054c84351123effd903, type: 3}
-  crashSFX: {fileID: 8300000, guid: 27e2156908d61324d947ce8b00c517c4, type: 3}
-  fuelBar: {fileID: 6415185112515463035}
-  foodCountTxt: {fileID: 7003761458960732269}
-  projectileCountTxt: {fileID: 1674039999460519241}
-  projectileCount: 0
-  fuelAmount: 100
+  crashSFX: {fileID: 8300000, guid: a7586c7bd9906ae4c9b1a99b4a876a43, type: 3}
+  finishLevelSFX: {fileID: 8300000, guid: e807c642f778746499abc7bb288ff8fb, type: 3}
 --- !u!114 &6626921841055617653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,8 +1302,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1f955ceabe92940a4657aee441a3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4202811772162542093, guid: 2077663837618ad4daa03b6667869299, type: 3}
+  bulletPrefab: {fileID: 4202811772162542093, guid: 2077663837618ad4daa03b6667869299, type: 3}
   firePoint: {fileID: 6203086056469004495}
+  fireSFX: {fileID: 8300000, guid: 797a777ce424e2f438a55752225686b0, type: 3}
+--- !u!114 &186697508576737675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818535440046969216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ee447278665424686e88ab5caa8761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletCountTxt: {fileID: 1674039999460519241}
+--- !u!114 &9219603601241402276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818535440046969216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65a60ea0a18bb14281136ab64280ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelBar: {fileID: 6415185112515463035}
+  fuelOverPanel: {fileID: 1120829732464151650}
+--- !u!114 &4219258743980056900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818535440046969216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22aedb9f909214941a3c732a4aa046a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodCountTxt: {fileID: 7003761458960732269}
 --- !u!82 &632966429599520170
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5631,7 +5671,7 @@ Transform:
   m_GameObject: {fileID: 8632686432355394305}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

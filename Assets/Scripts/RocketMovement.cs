@@ -5,13 +5,11 @@ public class RocketMovement : MonoBehaviour
     Rigidbody rocketRB;
     AudioSource rocketAS;
 
+    [Header("Rocket Movement Variables")]
     [SerializeField] float thrustingPower;
     [SerializeField] float rotationSpeed;
-
-
-
+    [Header("Rocket Movement Effects")]
     [SerializeField] AudioClip motorSFX;
-
     [SerializeField] ParticleSystem mainMotorVFX,leftRotMotorVFX,rightRotMotorVFX;
 
 
@@ -41,9 +39,11 @@ public class RocketMovement : MonoBehaviour
             }
 
             rocketRB.AddRelativeForce(transform.up*thrustingPower*Time.deltaTime,ForceMode.VelocityChange);
+            
             mainMotorVFX.Play();
-            gameObject.GetComponent<DetectCollision>().fuelAmount-=0.1f;
-            gameObject.GetComponent<DetectCollision>().UpdateFuelBar();
+           
+            gameObject.GetComponent<FuelManager>().FuelAmount-=0.1f;
+            gameObject.GetComponent<FuelManager>().UpdateFuelBar();
         }
 
     }

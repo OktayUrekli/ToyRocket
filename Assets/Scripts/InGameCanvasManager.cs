@@ -34,7 +34,7 @@ public class InGameCanvasManager : MonoBehaviour
 
     public void ReturnMenuButton()
     {
-
+        SceneManager.LoadScene(0);
     }
 
 
